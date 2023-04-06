@@ -1,0 +1,117 @@
+.main{
+    width: 1100px;
+    margin: 0 auto;
+}
+
+.table{
+    width: 1100px;
+    margin: 0 auto;
+    margin-top: 20px;
+    border: 1px solid #000;
+    border-collapse : collapse;
+}
+
+.warpper > div {
+    width: 1100px;
+    margin: 0 auto;
+}
+
+.btn_1{
+    width: 90px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: #ffd780;
+    color: #000;
+    font-weight: 500;
+    font-size: 18px;
+    border: 1px solid gray;
+    float: right;
+    margin-bottom: 5px;
+}
+
+.tr > td{
+    height: 30px;
+    border: 1px solid #000;
+    text-align: center;
+}
+
+.tr{
+    border: 1px solid #000;
+}
+
+.tr > th {
+    border: 1px solid #000;
+    height: 30px;;
+}
+
+.pagination{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 30PX;
+}
+
+.pagination > li {
+    width: 50px;
+    font-size: 18px;
+    font-weight: 600;
+
+}
+
+.pagination > li > a:hover{
+    color: gray;
+}
+
+.ani{
+    width: 120px;
+}
+
+.nature{
+    width: 80px;
+}
+
+.h1_font{
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 80px;
+    margin-bottom: 30px;
+}
+
+.btn_1:hover{
+    background:#f0e2c3;
+}
+
+/* 페이징 */
+.pagination{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 30PX;
+}
+
+.pagination > li {
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+}
+.pagination > li > a{
+    display: inline-block;
+    width: 100%;
+}
+.pagination > li > a:hover{
+    color: gray;
+}
+
+.pageprevious, .pagenext{
+    width: 40px;
+    margin: 0 10px;
+}
+.pagenum{
+    width: 30px;
+}
+
+.disabled{
+    pointer-events: none;
+}

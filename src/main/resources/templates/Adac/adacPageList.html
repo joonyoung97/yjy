@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{body}">
+
+<th:block layout:fragment="script">
+  <script th:inline="javascript">
+
+        $(document).ready(function(){
+            $("#searchBtn").on("click",function(e) {
+                e.preventDefault();
+                page(0);
+            });
+        });
+
+        function page(page){
+            var searchQuery = $("#searchQuery").val();
+
+            location.href="/adacpage/show/" + page + "?searchQuery=" + searchQuery;
+        }
+
+
+        function del(AdAcPageId){
+            const result = confirm('센터를 삭제 하시겠습니까?');
+
+            if(result){
+                location.href="/adacpage/show/delete/"+AdAcPageId;
+            }
+        }
+
+
+
+    </script>
+</th:block>
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+  <style>
+        select{
+            margin-right:10px;
+        }
+    </style>
+</th:block>
+
+<div layout:fragment="content">
+  <h1>유기견 관리 센터 리스트</h1>
+  <form th:action="@{'/adAcPage/show/'}" role="form" method="get" th:object="${adAcPages}" style="width: 1200px; margin: 60px auto;">
+    <table class="table">
+      <thead>
+      <tr>
+        <td>번호</td>
+        <td>명칭</td>
+        <td>이메일</td>
+        <td>전화번호</td>
+        <td>홈페이지</td>
+        <td>담당자</td>
+        <td>담당자 핸드폰번호</td>
+        <td>센터 주소</td>
+        <td>센터 지역</td>
+        <td>삭제</td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="adAcPage, status: ${adAcPages.getContent()}">
+        <td th:text="${(adAcPageCount - status.index) - (adAcPages.number * 5)}"></td>
+        <td>
+          <a th:href="'/adacpage/show/update/'+${adAcPage.id}" th:text="${adAcPage.name}"></a>
+        </td>
+        <td th:text="${adAcPage.email}"></td>
+        <td th:text="${adAcPage.tel}"></td>
+        <td th:text="${adAcPage.homepage}"></td>
+        <td th:text="${adAcPage.representative}"></td>
+        <td th:text="${adAcPage.representativeHp}"></td>
+        <td th:text="${adAcPage.addr}"></td>
+        <td th:text="${adAcPage.area}"></td>
+        <td>
+          <!-- <a th:onclick="javascript:delete(${notice.id})">삭제</a>-->
+          <a th:onclick="'javascript:del('+${adAcPage.id}+')'" style="cursor:pointer;" th:text="삭제"></a>
+          <!--            <a th:href="'/adacpage/show/delete/'+${adAcPage.id}" th:onclick="'javascript:del('+${adAcPage.id}+')'" style="cursor:pointer;" th:text="삭제"></a>-->
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+
+
+    <div th:with="start=${(adAcPages.number/maxPage)*maxPage + 1}, end=(${(adAcPages.totalPages == 0) ? 1 : (start + (maxPage - 1) < adAcPages.totalPages ? start + (maxPage - 1) : adAcPages.totalPages)})" >
+      <ul class="pagination justify-content-center">
+
+        <li class="page-item" th:classappend="${adAcPages.first}?'disabled'">
+          <a th:onclick="'javascript:page(' + ${adAcPages.number - 1} + ')'" aria-label='Previous' class="page-link">
+            <span aria-hidden='true'>Previous</span>
+          </a>
+        </li>
+
+        <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${adAcPages.number eq page-1}?'active':''">
+          <a th:onclick="'javascript:page(' + ${page - 1} + ')'" th:inline="text" class="page-link">[[${page}]]</a>
+        </li>
+
+        <li class="page-item" th:classappend="${adAcPages.last}?'disabled'">
+          <a th:onclick="'javascript:page(' + ${adAcPages.number + 1} + ')'" aria-label='Next' class="page-link">
+            <span aria-hidden='true'>Next</span>
+          </a>
+        </li>
+
+      </ul>
+    </div>
+
+
+
+
+    <button type="button" class="btn btn-primary"
+            onclick="location.href='/adacpage/adacpageForm'">  등록하기</button>
+
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+    <!--검색창-->
+    <div class="form-inline justify-content-center" th:object="${adAcPageSearchDto}">
+      <input th:field="*{searchQuery}" type="text" class="form-control" placeholder="검색어를 입력해주세요">
+      <button id="searchBtn" type="submit" class="btn btn-primary">검색</button>
+    </div>
+
+
+
+  </form>
+</div>
+</html>
+
+
+
+<!--         업데이트 때 사용하면 될듯   <td>-->
+<!--              <a th:href="'/admin/item/'+${item.id}" th:text="${item.itemNm}"></a>-->
+<!--            </td>-->
+
+
+
+
+<!--    <div class="form-inline justify-content-center" th:object="${itemSearchDto}">-->
+<!--      <select th:field="*{searchDateType}" class="form-control" style="width:auto;">-->
+<!--        <option value="all">전체기간</option>-->
+<!--        <option value="1d">1일</option>-->
+<!--        <option value="1w">1주</option>-->
+<!--        <option value="1m">1개월</option>-->
+<!--        <option value="6m">6개월</option>-->
+<!--      </select>-->
+<!--      <select th:field="*{searchSellStatus}" class="form-control" style="width:auto;">-->
+<!--        <option value="">판매상태(전체)</option>-->
+<!--        <option value="SELL">판매</option>-->
+<!--        <option value="SOLD_OUT">품절</option>-->
+<!--      </select>-->
+<!--      <select th:field="*{searchBy}" class="form-control" style="width:auto;">-->
+<!--        <option value="itemNm">상품명</option>-->
+<!--        <option value="createdBy">등록자</option>-->
+<!--      </select>-->
+<!--      <input th:field="*{searchQuery}" type="text" class="form-control" placeholder="검색어를 입력해주세요">-->
+<!--      <button id="searchBtn" type="submit" class="btn btn-primary">검색</button>-->
+<!--    </div>-->
+
+
+
+
+
+
+
+
+<!-- html에서 회원가입을 위해 이름,이메일,비밀번호,주소를 입력하고
+회원가입 버튼을 클릭하면 memberFormDto 객체값으로 저장된다.
+그러면 memberFormDto의 객체에 저장되어있는 값을 데이터베이스에 저장 시키면된다.
+
+이전에 했던 jsp 회원가입과정과 비교하면 회원가입을 위한 내용을 입력하고
+-> request에서 getParameter을 통해 input 태그에 입력된값을 하나씩 가져와 데이터베이스에 저장을 했다.
+
+스프링에서는 회원가입을 위한 내용을 입력하면 th:object에 지정해 놓은 객체로 저장되고
+그 객체를 데이터베이스에 저장하면 된다. -->

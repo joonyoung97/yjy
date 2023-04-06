@@ -1,0 +1,89 @@
+.warpper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    height: 581px;
+}
+
+/*li태그들*/
+.nav{
+    width: 300px;
+    font-size: 22px;
+}
+
+.nav ul a{
+    text-align: left;
+
+}
+
+.nav ul li{
+    margin-bottom: 30px;
+    color: gray;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+.nav ul li:hover {
+    color: #000;
+    font-weight: 600;
+}
+
+/*프로필*/
+.profile{
+    width: 850px;
+    height: 300px;
+    border: 4px double #000;
+    background-color: #f1e3c473;
+    border-radius: 20px;
+}
+
+.profile > div{
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin : 40px 50px
+}
+
+.img{
+    width: 200px;
+    height: 200px;
+
+    border-radius: 50%;
+}
+
+.img > img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.profile > div >i {
+    font-size: 32px;
+}
+
+.profile > div > {
+    width: 350px;
+    font-size: 32px;
+}
+
+.my{
+    display: flex;
+}
+
+.my_text{
+    width: 350px;
+    margin-top: 80px;
+    font-size: 24px;
+    margin-left: 20px;
+}
+
+.bi-bell-fill{
+    color: skyblue;
+    border-radius: 50%;
+}
+
+.bi-heart-fill{
+    color: lightpink
+}

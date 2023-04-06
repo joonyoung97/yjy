@@ -1,0 +1,91 @@
+
+.main {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+}
+
+h1{
+    text-align: center;
+}
+
+.notice_wrap {
+    background-color: #fff;
+    border: 3px double green;
+    padding: 30px 50px 30px 30px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group-prepend .input-group-text {
+    background-color: #e9ecef;
+    border-color: #ced4da;
+}
+
+.title_input {
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    height: 40px;
+    padding: 10px;
+    width: 100%;
+}
+
+.textarea_input {
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    height: 200px;
+    padding: 10px;
+    resize: none;
+    width: 100%;
+}
+
+.input-group-prepend{
+    margin-top: 25px;
+}
+
+.img-div {
+    margin-top: 10px;
+}
+
+.custom-file-input {
+    cursor: pointer;
+}
+
+.custom-file-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.imgfile_div{
+    margin-top: 25px;
+}
+
+.btn-primary {
+    background-color: #f8bf86;
+    margin-right: 10px;
+}
+
+.btn-primary:hover {
+    background-color: #f0d8c1;
+    color: #000;
+}
+
+.fieldError {
+    color: red;
+}
+
+.btn-primary,
+.custom-file-input,
+.custom-file-label {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.btn-primary {
+    padding: 10px 20px;
+    margin-top: 20px;
+}

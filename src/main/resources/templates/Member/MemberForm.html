@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{body}">
+
+<head>
+    <meta name="_csrf" th:content="${_csrf?.token}">
+    <meta name="_csrf_header" th:content="${_csrf?.headerName}">
+
+    <link th:href="@{/css/member.css}" rel="stylesheet">
+    <style>
+        .fieldError {
+            color: red;
+            width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            margin-top: -30px;
+            margin-bottom: 30px;
+        }
+
+        .fieldError_pw{
+            color: red;
+            width: 900px;
+            margin: 0 auto;
+            text-align: left;
+            margin-top: -30px;
+            margin-bottom: 30px;
+            margin-left: 650px;
+        }
+    </style>
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+    <script th:src="@{/js/member.js}"></script>
+    <script th:inline="javascript">
+        $(document).ready(function(){
+            var msg = [[${errorMessage}]];
+            if(msg !=null){
+                alert(msg);
+            }
+        });
+</script>
+</head>
+
+<div layout:fragment="content">
+    <form action="/members/new" role="form" method="post" th:object="${memberFormDto}">
+        <main>
+            <div class="main">
+                <div class="hea">
+                    <h4>기본정보</h4>
+                    <h6>필수*</h6>
+                </div>
+
+                <div class="basic">
+                    <div class="box">
+                        <label th:for="name">이름</label>
+                        <input type="text" id="user" placeholder="이름을 입력하세요." th:field="*{name}"><br>
+                    </div>
+                    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="fieldError">잘못된 형식</p>
+                    <div class="box">
+                        <label th:for="email">아이디(이메일)</label>
+                        <input type="email" id="email" placeholder="이메일을 입력하세요"  th:field="*{email}"><br>
+                    </div>
+                    <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="fieldError">잘못된 형식</p>
+                    <div class="box">
+                        <label th:for="password">비밀번호</label>
+                        <input type="password" id="password" placeholder="8~12자 내에 입력해주세요" th:field="*{password}"><br>
+                    </div>
+                    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="fieldError">잘못된 형식</p>
+                    <div class="box">
+                        <label th:for="brith">생년월일</label>
+                        <input type="date" id="date" th:field="*{brith}">
+                    </div>
+                    <div class="box">
+                        <label th:for="tel">전화번호</label>
+                        <input type="tel" id="tel" oninput="autoHyphen2(this)" placeholder="00*-000*-0000" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" maxlength="13" th:field="*{tel}" ><br>
+                    </div>
+                    <p th:if="${#fields.hasErrors('tel')}" th:errors="*{tel}" class="fieldError">잘못된 형식</p>
+
+                    <div class="box">
+                        <label th:for="address">주소</label>
+                        <div class="addr">
+                            <input type="text" id="sample6_postcode" placeholder="우편번호">
+                            <input type="button" id="zip_code_btn" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="zip_code_btn">
+                            <input type="text" id="sample6_address" placeholder="주소" th:field="*{address}">
+                            <input type="text" id="sample6_address2" placeholder="상세주소">
+                        </div>
+                    </div>
+                    <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="fieldError">잘못된 형식</p>
+                </div>
+
+                <div class="hea">
+                    <h4>추가정보</h4>
+                    <h6>필수*</h6>
+                </div>
+
+                <div class="info">
+                    <div class="info_box">
+                        <label>MBTI</label>
+                        <select th:field="*{mbti}" name="MBTI" id="MBTI">
+                            <option value="">===MBTI선택===</option>
+                            <option th:value="ESTP">ESTP</option>
+                            <option th:value="ESTJ">ESTJ</option>
+                            <option th:value="ESFP">ESFP</option>
+                            <option th:value="ESFJ">ESFJ</option>
+                            <option th:value="ENFP">ENFP</option>
+                            <option th:value="ENFJ">ENFJ</option>
+                            <option th:value="ENTP">ENTP</option>
+                            <option th:value="ENTJ">ENTJ</option>
+                            <option th:value="ISTP">ISTP</option>
+                            <option th:value="ISTJ">ISTJ</option>
+                            <option th:value="ISFP">ISFP</option>
+                            <option th:value="ISFJ">ISFJ</option>
+                            <option th:value="INFP">INFP</option>
+                            <option th:value="INFJ">INFJ</option>
+                            <option th:value="INTP">INTP</option>
+                            <option th:value="INTJ">INTJ</option>
+                        </select>
+                        <br>
+                    </div>
+                    <p th:if="${#fields.hasErrors('mbti')}" th:errors="*{mbti}" class="fieldError">잘못된 형식</p>
+                    <div class="mbti_text">
+                        <p >혹시 자신의 MBTI를 알고 싶으시다면 <a target="_blank" class="MBTI_font" href="https://www.16personalities.com/ko/%EB%AC%B4%EB%A3%8C-%EC%84%B1%EA%B2%A9-%EC%9C%A0%ED%98%95-%EA%B2%80%EC%82%AC">여기</a>를 클릭해주세요</p>
+                    </div>
+
+                    <div class="info_rear">
+                        <label>양육경험</label>
+                        <div class="rear" th:each="type : ${parentingExperiences}">
+                           <input th:field="*{parentingExperience}"
+                                           th:value="${type.name()}" type="radio">
+                            <label th:for="${#ids.prev('parentingExperience')}"
+                                          th:text="${type.description}"></label>
+                        </div>
+                    </div>
+                    <p th:if="${#fields.hasErrors('parentingExperience')}" th:errors="*{parentingExperience}" class="fieldError">잘못된 형식</p>
+                    <div class="info_box">
+                        <label th:for="workTime">출퇴근시간</label>
+                        <div class="time">
+                            <input type="time" id="time_1" th:field="*{workTime}">&nbsp;&nbsp;~&nbsp;&nbsp; <input type="time" id="time_2" th:field="*{workTime}">
+                        </div>
+                    </div>
+                    <p th:if="${#fields.hasErrors('workTime')}" th:errors="*{workTime}" class="fieldError">잘못된 형식</p>
+
+                    <div class="info_box">
+                        <label>동거인 유무</label>
+                        <div class="you" th:each="type : ${inmates}">
+                            <input  th:field="*{Inmate}" th:value="${type.name()}" type="radio">
+                            <label th:for="${#ids.prev('Inmate')}"
+                                    th:text="${type.description}"></label>
+                        </div>
+                    </div>
+                    <p th:if="${#fields.hasErrors('Inmate')}" th:errors="*{Inmate}" class="fieldError">잘못된 형식</p>
+
+                    <div class="info_box">
+                        <label>관심동물<br>(중복가능)</label>
+                        <div class="animal you" th:each="companionChoice : ${companionChoice}">
+                            <input type="checkbox" th:field="*{companionChoice}" th:value="${companionChoice.key}">
+                            <label class="form-check-label" th:for="${#ids.prev('companionChoice')}"
+                                   th:text="${companionChoice.value}">강아지</label>
+                        </div>
+                    </div>
+                    <p th:if="${#fields.hasErrors('companionChoice')}" th:errors="*{companionChoice}" class="fieldError">잘못된 형식</p>
+                </div>
+
+                <div class="hea">
+                    <h4>이용약관동의</h4>
+                    <h6>필수*</h6>
+                </div>
+
+                <label for="agree_all" class="agree">
+                    <input type="checkbox" name="agree" id="agree_all" onclick="selectAll(this);">
+                    <span class="one" >모두 동의합니다</span>
+                </label>
+
+                <label for="agree" class="agree">
+                    <input type="checkbox" name="agree" value="1">
+                    <span>이용약관 동의<strong> (필수)</strong></span>
+                    <div style="overflow:scroll" class="scroll">
+                        *제1조 목적<br>
+                        본 이용약관은 "MPC" 서비스의 이용조건과 운영에 관한 제반사항 규정을 목적으로 합니다.<br><br>
+
+                        *제2조 용어의 정의<br>
+
+                        본 약관에서 사용되는 주요한 용어의 정의는 다음과 같습니다.<br>
+
+                        ① 회원 : 사이트의 약관에 동의하고 개인정보를 제공하여 회원등록을 한 자로서, 사이트와의 이용계약을 체결하고 사이트를 이용하는 이용자를 말합니다.<br>
+                        ② 이용계약 : 사이트 이용과 관련하여 사이트와 회원간에 체결 하는 계약을 말합니다.<br>
+                        ③ 회원 아이디(이하 "ID") : 회원의 식별과 회원의 서비스 이용을 위하여 회원별로 부여하는 고유한 문자와 숫자의 조합을 말합니다.<br>
+                        ④ 비밀번호 : 회원이 부여받은 ID와 일치된 회원임을 확인하고 회원의 권익보호를 위하여 회원이 선정한 문자와 숫자의 조합을 말합니다.<br>
+                        ⑤ 운영자 : 서비스에 홈페이지를 개설하여 운영하는 운영자를 말합니다.<br>
+                        ⑥ 해지 : 회원이 이용계약을 해약하는 것을 말합니다.<br><br>
+
+                        *제3조 약관외 준칙 <br>
+
+                        운영자는 필요한 경우 별도로 운영정책을 공지 안내할 수 있으며, 본 약관과 운영정책이 중첩될 경우 운영정책이 우선 적용됩니다.<br><br>
+
+                        *제4조 이용계약 체결<br>
+
+                        ① 이용계약은 회원으로 등록하여 사이트를 이용하려는 자의 본 약관 내용에 대한 동의와 가입신청에 대하여 운영자의 이용승낙으로 성립합니다.<br>
+                        ② 회원으로 등록하여 서비스를 이용하려는 자는 사이트 가입신청시 본 약관을 읽고 아래에 있는 "동의합니다"를 선택하는 것으로 본 약관에 대한 동의 의사 표시를 합니다.<br><br>
+
+                        *제5조 서비스 이용 신청<br>
+
+                        ① 회원으로 등록하여 사이트를 이용하려는 이용자는 사이트에서 요청하는 제반정보(이용자ID,비밀번호, 닉네임 등)를 제공해야 합니다.<br>
+                        ② 타인의 정보를 도용하거나 허위의 정보를 등록하는 등 본인의 진정한 정보를 등록하지 않은 회원은 사이트 이용과 관련하여 아무런 권리를 주장할 수 없으며, 관계 법령에 따라 처벌 받을 수 있습니다.<br><br>
+
+                        *제6조 개인정보처리방침<br>
+
+                        사이트 및 운영자는 회원가입시 제공한 개인정보 중 비밀번호를 가지고 있지 않으며 이와 관련된 부분은 사이트의 개인정보처리방침을 따릅니다.<br>
+                        운영자는 관계법령이 정하는 바에 따라 회원등록정보를 포함한 회원의 개인정보를 보호하기 위하여 노력을 합니다.<br><br>
+
+                        회원의 개인정보보호에 관하여 관계법령 및 사이트가 정하는 개인정보처리방침에 정한 바에 따릅니다.<br><br>
+
+                        단, 회원의 귀책사유로 인해 노출된 정보에 대해 운영자는 일체의 책임을 지지 않습니다.<br>
+                        운영자는 회원이 미풍양속에 저해되거나 국가안보에 위배되는 게시물 등 위법한 게시물을 등록 · 배포할 경우 관련기관의 요청이 있을시 회원의 자료를 열람 및 해당 자료를 관련기관에 제출할 수 있습니다.<br><br>
+
+                        *제7조 운영자의 의무<br>
+
+                        ① 운영자는 이용회원으로부터 제기되는 의견이나 불만이 정당하다고 인정할 경우에는 가급적빨리 처리하여야 합니다. 다만, 개인적인 사정으로 신속한 처리가 곤란한 경우에는 사후에공지 또는 이용회원에게 쪽지, 전자우편 등을 보내는 등 최선을 다합니다.<br>
+                        ② 운영자는 계속적이고 안정적인 사이트 제공을 위하여 설비에 장애가 생기거나 유실된 때에는 이를 지체 없이 수리 또는 복구할 수 있도록 사이트에 요구할 수 있습니다. 다만, 천재지변 또는 사이트나 운영자에 부득이한 사유가 있는 경우, 사이트 운영을 일시 정지할 수 있습니다.<br><br>
+
+                        *제8조 회원의 의무<br>
+
+                        ① 회원은 본 약관에서 규정하는 사항과 운영자가 정한 제반규정, 공지사항 및 운영정책 등 사이트가 공지하는 사항 및 관계법령을 준수하여야 하며, 기타 사이트의 업무에 방해가 되는 행위, 사이트의 명예를 손상시키는 행위를 해서는 안됩니다.<br>
+                        ② 회원은 사이트의 명시적 동의가 없는 한 서비스의 이용권한, 기타 이용계약상 지위를 타인에게 양도, 증여할 수 없으며, 이를 담보로 제공할 수 없습니다.<br>
+                        ③ 이용고객은 아이디 및 비밀번호 관리에 상당한 주의를 기울여야 하며, 운영자나 사이트의 동의 없이 제3자에게 아이디를 제공하여 이용하게 할 수 없습니다.<br><br>
+                        ④ 회원은 운영자와 사이트 및 제3자의 지적 재산권을 침해해서는 안됩니다.<br><br>
+
+                        *제9조 게시물의 관리<br>
+
+                        ① 사이트의 게시물과 자료의 관리 및 운영의 책임은 운영자에게 있습니다. 운영자는 항상 불량 게시물 및 자료에 대하여 모니터링을 하여야 하며, 불량 게시물 및 자료를 발견하거나 신고를 받으면 해당 게시물 및 자료를 삭제하고 이를 등록한 회원에게 주의를 주어야 합니다.
+                        한편, 이용회원이 올린 게시물에 대해서는 게시자 본인에게 책임이 있으니 회원스스로 본 이용약관에서 위배되는 게시물은 게재해서된 안됩니다.<br>
+                        ② 정보통신윤리위원회 등 공공기관의 시정요구가 있는 경우 운영자는 회원의 사전동의 없이 게시물을 삭제하거나 이동 할 수 있습니다.<br>
+                        ③ 불량게시물의 판단기준은 다음과 같습니다.<br>
+                        - 다른 회원 또는 제3자에게 심한 모욕을 주거나 명예를 손상시키는 내용인 경우<br>
+                        - 공공질서 및 미풍양속에 위반되는 내용을 유포하거나 링크시키는 경우<br>
+                        - 불법복제 또는 해킹을 조장하는 내용인 경우<br>
+                        - 영리를 목적으로 하는 광고일 경우<br>
+                        - 범죄와 결부된다고 객관적으로 인정되는 내용일 경우<br>
+                        - 다른 이용자 또는 제3자와 저작권 등 기타 권리를 침해하는 경우<br>
+                        - 기타 관계법령에 위배된다고 판단되는 경우<br>
+                        ④ 사이트 및 운영자는 게시물 등에 대하여 제3자로부터 명예훼손, 지적재산권 등의 권리 침해를 이유로 게시중단 요청을 받은 경우 이를 임시로 게시중단(전송중단)할 수 있으며, 게시중단 요청자와 게시물 등록자 간에 소송, 합의 기타 이에 준하는 관련기관의 결정 등이 이루어져 사이트에 접수된 경우 이에 따릅니다.<br><br>
+
+
+                        *제10조 손해배상<br>
+
+                        ① 본 사이트의 발생한 모든 민,형법상 책임은 회원 본인에게 1차적으로 있습니다.<br>
+                        ② 본 사이트로부터 회원이 받은 손해가 천재지변 등 불가항력적이거나 회원의 고의 또는 과실로 인하여 발생한 때에는 손해배상을 하지 하지 않습니다.<br><br>
+
+                        *제11조 면책<br>
+
+                        ① 운영자는 회원이 사이트의 서비스 제공으로부터 기대되는 이익을 얻지 못하였거나 서비스 자료에 대한 취사선택 또는 이용으로 발생하는 손해 등에 대해서는 책임이 면제됩니다.<br>
+                        ② 운영자는 본 사이트의 서비스 기반 및 타 통신업자가 제공하는 전기통신서비스의 장애로 인한 경우에는 책임이 면제되며 본 사이트의 서비스 기반과 관련되어 발생한 손해에 대해서는 사이트의 이용약관에 준합니다<br>
+                        ③ 운영자는 회원이 저장, 게시 또는 전송한 자료와 관련하여 일체의 책임을 지지 않습니다.<br>
+                        ④ 운영자는 회원의 귀책사유로 인하여 서비스 이용의 장애가 발생한 경우에는 책임지지 아니합니다.<br>
+                        ⑤ 운영자는 회원 상호간 또는 회원과 제3자 상호간, 기타 회원의 본 서비스 내외를 불문한 일체의 활동(데이터 전송, 기타 커뮤니티 활동 포함)에 대하여 책임을 지지 않습니다.<br>
+                        ⑥ 운영자는 회원이 게시 또는 전송한 자료 및 본 사이트로 회원이 제공받을 수 있는 모든 자료들의 진위, 신뢰도, 정확성 등 그 내용에 대해서는 책임지지 아니합니다.<br>
+                        ⑦ 운영자는 회원 상호간 또는 회원과 제3자 상호간에 서비스를 매개로 하여 물품거래 등을 한 경우에 그로부터 발생하는 일체의 손해에 대하여 책임지지 아니합니다.<br>
+                        ⑧ 운영자는 시삽의 귀책사유 없이 회원간 또는 회원과 제3자간에 발생한 일체의 분쟁에 대하여 책임지지 아니합니다.<br>
+                        ⑨ 운영자는 서버 등 설비의 관리, 점검, 보수, 교체 과정 또는 소프트웨어의 운용 과정에서 고의 또는 고의에 준하는 중대한 과실 없이 발생할 수 있는 시스템의 장애, 제3자의 공격으로 인한 시스템의 장애, 국내외의 저명한 연구기관이나 보안관련 업체에 의해 대응방법이 개발되지 아니한 컴퓨터 바이러스 등의 유포나 기타 운영자가 통제할 수 없는 불가항력적 사유로 인한 회원의 손해에 대하여 책임지지 않습니다.<br><br>
+                    </div>
+                </label>
+
+                <label for="agree" class="agree">
+                    <input type="checkbox" name="agree" value="2">
+                    <span>개인정보 수집, 이용 동의<strong> (필수)</strong></span>
+                    <div style="overflow:scroll" class="scroll">
+                        1. 개인정보 수집목적 및 이용목적<br><br>
+
+                        (1) 홈페이지 회원 가입 및 관리<br>
+                        회원 가입의사 확인, 회원제 서비스 제공에 따른 본인 식별․인증, 회원자격 유지․관리, 제한적 본인확인제 시행에 따른 본인확인, 서비스 부정이용 방지, 만 14세 미만 아동의 개인정보 처리시 법정대리인의 동의여부 확인, 각종 고지․통지, 고충처리 등의 목적<br><br>
+
+                        (2) 재화 또는 서비스 제공<br>
+                        물품배송, 서비스 제공, 계약서․청구서 발송, 콘텐츠 제공, 맞춤서비스 제공, 본인인증, 연령인증, 요금결제 및 정산, 채권추심 등의 목적<br><br>
+
+                        (3) 고충처리<br>
+                        민원인의 신원 확인, 민원사항 확인, 사실조사를 위한 연락․통지, 처리결과 통보 등<br><br>
+
+                        2. 수집하는 개인정보 항목<br>
+                        ID, 성명, 비밀번호, 주소, 휴대폰번호, 이메일, 14세 미만 가입자의 경우 법정대리인 정보<br><br>
+
+                        3. 개인정보 보유 및 이용기간<br>
+                        회원탈퇴 시까지 (단, 관계 법령에 보존 근거가 있는 경우 해당 기간 시까지 보유, 개인정보처리방침에서 확인 가능)<br><br>
+                    </div>
+                </label>
+
+                <label for="agree" class="agree">
+                    <span>마케팅 활용 동의 및 광고 수신 동의<strong class="select_disable"></strong></span>
+                    <div style="overflow:scroll" class="scroll">
+                        1. 목적<br>
+                        도그마루에서 제공하는 서비스 이용 및 혜택 안내를 위한 마케팅 동의<br><br>
+
+                        2. 수집하는 개인정보 항목<br>
+                        성명, 연락처, 이메일, 기타 정보<br><br>
+
+                        3. 마케팅 활용 범위<br>
+                        각종 SMS를 포함한 메세지, 메일, APP PUSH/알림 등<br><br>
+
+                        4. 개인정보의 보유 및 이용기간<br>
+                        정보주체의 정보 제공일로부터 계약의 효력 소멸시까지 최소한의 개인정보를 보유 및 이용하게 됩니다. 또한, 보유와 이용목적 소멸사유 발생 시 해당 정보를 지체없이 파기합니다.<br><br>
+
+                        * 개인정보 및 마케팅 활용에 동의하지 않을 수 있으나, 미 동의 시 도그마루의 혜택 및 이벤트, 이용 서비스 안내에 대한 자세한 정보 확인이 불가능할 수 있습니다.<br><br>
+
+                        5. 개인정보 제3자 제공<br>
+                        a. 목적 : 도그마루 제휴사(도그마루 내규에 한하여 지정된 업체) 혜택 서비스 이용 제공<br>
+                        b. 정보제공 항목 : 성명, 연락처, 이메일, 기타 정보<br>
+                        c. 제공받는 자 : 도그마루 제휴사 (도그마루 내규에 한하여 지정된 업체)<br>
+                        d. 이용기간 : 회원 탈퇴 혹은 개인정보 제3자 제공 철회 시까지
+                    </div>
+                </label>
+
+                <div class="agr_for">
+                    <input type="checkbox"><lable>[선택]SMS 수신 동의</lable>
+                    <input type="checkbox"><lable>[선택]E-Mail 수신 동의</lable>
+                </div>
+
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <div class="join_but">
+                    <button id="but" onclick="formCheck(this.form)" style="cursor: pointer;">가입</button>
+                </div>
+            </div>
+        </main>
+    </form>
+</div>
+</html>
+
+<!-- html에서 회원가입을 위해 이름,이메일,비밀번호,주소를 입력하고
+회원가입 버튼을 클릭하면 memberFormDto 객체값으로 저장된다.
+그러면 memberFormDto의 객체에 저장되어있는 값을 데이터베이스에 저장 시키면된다.
+
+이전에 했던 jsp 회원가입과정과 비교하면 회원가입을 위한 내용을 입력하고
+-> request에서 getParameter을 통해 input 태그에 입력된값을 하나씩 가져와 데이터베이스에 저장을 했다.
+
+스프링에서는 회원가입을 위한 내용을 입력하면 th:object에 지정해 놓은 객체로 저장되고
+그 객체를 데이터베이스에 저장하면 된다. -->

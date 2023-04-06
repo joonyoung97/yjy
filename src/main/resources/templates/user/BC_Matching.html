@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{body}">
+
+<head>
+  <link th:href="@{/css/BC_Matching.css}" rel="stylesheet"/>
+</head>
+
+<div layout:fragment="content" class="main">
+  <div class="warpper">
+    <div class="matching_text">
+      <label>매칭이 완료되었습니다.</label>
+    </div>
+
+    <table class="table">
+      <thead>
+      <tr>
+        <td class="ani">유기센터명</td>
+        <td class="tel">전화번호</td>
+        <td>바로가기</td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td th:text="${adAcPageDto.name}"></td>
+        <td th:text="${adAcPageDto.tel}"></td>
+        <td>
+          <a target="_blank" th:href="${adAcPageDto.homepage}">홈페이지</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div class="matching_btn">
+      <button onclick="location.href='/'">홈으로</button>
+    </div>
+  </div>
+</div>
+</html>

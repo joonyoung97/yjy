@@ -1,0 +1,53 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.h1_text{
+    margin: 30px 0 30px 0;
+}
+
+.repImgDiv {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.repImg {
+    width: 400px;
+    height: 300px;
+    object-fit: cover; /* 이미지 비율 유지를 위해 추가 */
+    border-radius: 5px;
+}
+
+.noImgtext{
+    margin: 30px 0;
+}
+h5 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.notice_text{
+    width: 550px;
+}
+
+.h4 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+
+hr {
+    border-top: 1px solid #ccc;
+    margin: 7px 0 20px 0;
+}
+
+.lead {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 50px;
+}

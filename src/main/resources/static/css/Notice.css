@@ -1,0 +1,152 @@
+.table{
+    margin-top: 15px;
+    width: 1000px;
+    margin: 0 auto;
+    border: 1px solid #000;
+    border-collapse : collapse;
+}
+
+.tr{
+    border: 1px solid black;
+    border-bottom: 3px double #000;
+}
+
+.main{
+    width: 1300px;
+    margin: 0 auto;
+    height: 540px;
+    align-items: center;
+}
+
+.td{
+    height: 30px;
+}
+
+h1{
+    margin: 0 auto;
+    text-align: center;
+}
+
+.pu{
+    width: 1300px;
+    margin: 0 auto;
+}
+
+.write{
+   width: 100px;
+   height: 30px;
+   margin: 0 auto;
+   border: 1px solid gray;
+   margin-bottom: 10px;
+   margin-left: 150px;
+   background-color: #FAECC5;
+   border-radius: 5px;
+}
+
+.no{
+    width: 60px;
+}
+
+.natDate{
+    width: 170px;
+}
+.nat{
+    width: 120px;
+}
+
+.titletd{
+    padding: 0 10px;
+}
+
+.notd, .datetd{
+    text-align: center;
+}
+.rev{
+    width: 120px;
+}
+
+th, td{
+   border: 1px solid #000;
+}
+
+.h1_font{
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+button{
+    text-align: center;
+    width: 110px;
+    margin: 0 auto;
+    display: block;
+}
+
+.register{
+    width: 120px;
+    background-color: #f1e3c4;
+    float: right;
+    margin-top: -35px;
+    margin-right: 150px;
+    padding: 5px;
+    display: block;
+}
+.boot{
+    margin-top: 700px;
+    font-size: 32px;
+    float: right;
+    margin-right: 20px;
+}
+
+.searchwrap{
+    display: flex;
+    justify-content: left;
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.form-control{
+    width: 200px;
+}
+
+#searchBtn{
+    margin: 0 10px;
+    width: 80px;
+}
+
+/* 페이징 */
+.pagination{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 30PX;
+}
+
+.pagination > li {
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+}
+.pagination > li > a{
+    display: inline-block;
+    width: 100%;
+}
+.pagination > li > a:hover{
+    color: gray;
+}
+
+.pageprevious, .pagenext{
+    width: 40px;
+    margin: 0 10px;
+}
+.pagenum{
+    width: 30px;
+}
+
+.disabled{
+    pointer-events: none;
+}
+
+.register_btn{
+    background-color:#f1e3c4;
+}

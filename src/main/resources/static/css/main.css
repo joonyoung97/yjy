@@ -1,0 +1,85 @@
+/*슬라이드*/
+.slideshow-container {
+    width: 100vw;
+    position: relative;
+    margin: auto;
+}
+
+.img_i{
+    width: 100vw;
+    margin-bottom: 40px;
+}
+
+/*매칭결과*/
+.matching {
+    width: 1250px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.matching h2{
+    font-size: 35px;
+    color: #4374D9;
+}
+
+.matching a{
+    float: right;
+    font-size: 35px;
+    margin-top: -48px;
+    color: #000;
+    text-decoration: none;
+}
+
+.box >div{
+    display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.box img{
+    margin: 0 auto;
+    width: 300px;
+    height: 300px;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+.p_text{
+    width: 300px;
+    text-align: center;
+    font-size: 20px;
+}
+
+/*월드컵*/
+.worldcup_text {
+    width:1350px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.worldcup_text h2 {
+    margin: 0 auto;
+    font-size: 35px;
+    color: #4374D9;
+}
+
+.worldcup_text a{
+    float: right;
+    font-size: 35px;
+    margin-top: -48px;
+    color: #000;
+    text-decoration: none;
+}
+
+.worldcup{
+    width: 1350px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.worldcup_img {
+    width: 1200px;
+}
+

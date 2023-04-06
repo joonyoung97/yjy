@@ -1,0 +1,146 @@
+.h1_font{
+    width: 1300px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 80px;
+    margin-bottom: 30px;
+}
+
+.tr{
+    border: 1px solid black;
+    border-bottom: 3px double #000;
+}
+
+.td{
+    height: 30px;
+    text-align: center;
+}
+
+.center {
+    text-align: center;
+}
+
+main{
+    width: 1300px;
+    margin: 0 auto;
+    height: 965px;
+    align-items: center;
+}
+
+.table{
+    margin-top: 15px;
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid #000;
+    border-collapse : collapse;
+}
+
+button{
+    margin: 0 auto;
+    display: block;
+    width: 70px;
+}
+
+.del{
+    width: 80px;
+}
+
+.area{
+    width: 80px;
+}
+
+.addr{
+    width: 150px;
+}
+
+.tel{
+    width: 130px;
+}
+
+.name{
+    width: 100px;
+}
+
+.Mem{
+    width: 60px;
+}
+
+.email{
+    width: 180px;
+}
+
+
+/* 페이징 */
+.pagination{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 30PX;
+}
+
+.pagination > li {
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+}
+.pagination > li > a{
+    display: inline-block;
+    width: 100%;
+}
+.pagination > li > a:hover{
+    color: gray;
+}
+
+.pageprevious, .pagenext{
+    width: 40px;
+    margin: 0 10px;
+}
+.pagenum{
+    width: 30px;
+}
+
+.disabled{
+    pointer-events: none;
+}
+
+.btn_1{
+    width: 80px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: #ffd780;
+    color: #000;
+    font-weight: 500;
+    font-size: 18px;
+    border: 1px solid gray;
+    float: right;
+    margin-bottom: 5px;
+}
+
+.text{
+    height: 20px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    width: 250px;
+    font-size: 22px;
+    padding: 5px;
+}
+
+.input{
+    width: 340px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn_2{
+    width: 80px;
+    height: 32px;
+    border-radius: 5px;
+    background-color: #ffd780;
+    color: #000;
+    font-size: 18px;
+    border: 1px solid gray;
+    float: right;
+    margin-bottom: 5px;
+    margin-left: 10px;
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{body}" >
+<th:block layout:fragment="script">
+<script th:src="@{/js/main.js}"></script>
+</th:block>
+<th:block layout:fragment="css">
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+</th:block>
+
+<div layout:fragment="content">
+    <main>
+        <div class="slideshow-container">
+            <div class="mySlideDiv fade active">
+                <img class="img_i" th:src="@{image/company 2.png}">
+            </div>
+
+            <div class="mySlideDiv fade">
+                <img class="img_i" th:src="@{image/slide 1.png}">
+            </div>
+
+            <div class="mySlideDiv fade">
+                <img class="img_i" th:src="@{image/slide 2.png}">
+            </div>
+
+            <div class="mySlideDiv fade">
+                <img class="img_i" th:src="@{image/slide 4.png}">
+            </div>
+        </div>
+
+        <iframe width="100%" height="500" src="https://www.youtube.com/embed/UHra-ksO6Us" frameborder="0" style="margin-bottom:50px;"></iframe>
+
+        <div class="matching">
+            <h2></h2>
+            <a href="./RV_List.html">&#10095;</a>
+            <div class="box">
+                <div>
+                    <img th:src="@{/image/1.jpg}" alt="1">
+                    <p class="p_text">골든 리트리버</p>
+                </div>
+                <div>
+                    <img th:src="@{/image/6.jpg}" alt="2">
+                    <p class="p_text">웰시코기</p>
+                </div>
+                <div>
+                    <img th:src="@{/image/21.jpg}" alt="3">
+                    <p class="p_text">뱅갈</p>
+                </div>
+                <div>
+                    <img th:src="@{/image/8.jpg}" alt="4">
+                    <p class="p_text">래브라도 리트리버</p>
+                </div>
+                <div>
+                    <img th:src="@{/image/14.jpg}" alt="5">
+                    <p class="p_text">시바견</p>
+                </div>
+                <div>
+                    <img th:src="@{/image/23.jpg}" alt="6">
+                    <p class="p_text">아메리칸 숏헤어</p>
+                </div>
+                <div>
+                    <img th:src="@{/image/20.jpg}" alt="7">
+                    <p class="p_text">터키쉬 앙고라</p>
+                </div>
+                <div>
+                    <img th:src="@{/image/15.jpg}" alt="8">
+                    <p class="p_text">허스키</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="worldcup_text">
+            <h2>반려동물 월드컵</h2>
+            <a th:href="@{/wordCup}">&#10095;</a>
+            <div class="worldcup">
+                <img th:src="@{image/worldcup.png}" class="worldcup_img">
+            </div>
+        </div>
+    </main>
+</div>
+</html>

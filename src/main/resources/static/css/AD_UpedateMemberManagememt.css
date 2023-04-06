@@ -1,0 +1,159 @@
+.warpper > h1{
+    width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+/* .warpper{
+    width:1100px;
+    margin: 0 auto;
+    margin-top: 30px;
+    border: 1px solid gray;
+} */
+
+main {
+    width: 100%;
+}
+
+.warpper > div {
+    width: 650px;
+    margin: 0 auto;
+}
+
+h3{
+    font-size: 25px;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-bottom: 3px dotted #000;
+}
+
+.box_main{
+    width: 600px;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.box_main label{
+    font-size: 18px;
+    font-weight: 700;
+    width: 150px;
+    text-align: center;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.box_main > input{
+    width: 350px;
+    padding: 10px;
+    font-size: 18px;
+}
+
+.addr > input {
+    width: 350px;
+    margin-left: 30px;
+    padding: 10px;
+    font-size: 18px;
+}
+
+#sample6_postcode{
+    width: 150px;
+    margin-bottom: 20px;
+    margin-left: -38px;
+}
+
+#zip_code_btn{
+    width: 150px;
+    height: 45px;
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+.box_main > label:last-child{
+    margin-left: 300px;
+}
+
+.addr_label{
+    margin-left: 70px;
+}
+
+#sample6_address{
+    width: 350px;
+    margin-bottom: 20px;
+    margin-left: -8px;
+}
+#sample6_address2{
+    width: 350px;
+    margin-bottom: 20px;
+    margin-left: -8px;
+}
+
+.box_main{
+    width: 600px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+
+/*추가정보*/
+.info_box{
+    width: 600px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.info_box label{
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.info_box select{
+    width: 350px;
+    margin-left: 140px;
+    padding: 10px;
+    font-size: 18px;
+}
+
+.info_box > div {
+    width: 350px;
+    padding: 10px;
+    font-size: 18px;
+}
+
+input[type=radio]{
+    width: 160px;
+    margin-top: 20px;
+}
+
+.info_box > input[type=text] {
+    width: 350px;
+    margin-left: 20px;
+    padding: 10px;
+    font-size: 18px;
+}
+
+input[type=radio]:last-child{
+    width: 170px;
+    margin-bottom: 30px;
+}
+
+.btn{
+    cursor: pointer;
+    width: 250px;
+    padding: 10px;
+    margin: 0 auto;
+    background-color: antiquewhite;
+    border: 1px solid #000;
+    font-size: 22px;
+}

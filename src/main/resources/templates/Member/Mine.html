@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{body}">
+
+<th:block layout:fragment="css">
+  <link th:href="@{/css/Mine.css}" rel="stylesheet">
+
+</th:block>
+
+<div layout:fragment="content">
+  <main>
+    <div class="warpper">
+      <div class="nav">
+        <ul>
+          <a th:href="@{/members/updateForm}"><li>회원정보</li></a>
+          <a th:href="@{/bcList/user/show}"><li>문의내역</li></a>
+          <a th:href="@{/bestchoice/list}"><li>매칭결과</li></a>
+          <a href=""><li>후원 및 결재정보 변경</li></a>
+        </ul>
+      </div>
+
+      <div class="profile">
+        <div>
+          <div class="my">
+            <div class="img"><img th:src="@{/image/img.jpg}"></div>
+            <div class="my_text">00 님 어서오세요</div>
+          </div>
+          <i class="bi bi-bell-fill"></i>
+          <i class="bi bi-heart-fill"></i>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</html>

@@ -1,0 +1,167 @@
+*{
+    margin: 0;
+}
+
+.warpper {
+    width: 100%;
+}
+
+.font {
+    text-align: center;
+    background-color: #f1e3c4;
+}
+
+.ber{
+    display:flex;
+    float: right;
+}
+
+.ber li {
+    margin-top: -100px;
+}
+
+.ber li a{
+    margin-right: 60px;
+    text-decoration: none;
+    color: #000;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.logo_img{
+    width: 150px;
+}
+
+li {
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+    text-align: center;
+}
+
+#menu_box{
+    position: relative;
+    width: 100%;
+    background-color:  #f1e3c4;
+}
+
+.menu_bar h4{
+    font-size: 20px;
+}
+
+#menu_box{
+    padding-bottom: 20px;
+    width: 1300px;
+    margin: 0 auto;
+}
+
+.menu_bar{
+    width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+ul{
+    margin-left: -40px;
+}
+
+footer{
+    background-color: #f1e3c4;
+    height: 200px;
+}
+
+.footer{
+    width: 1150px;
+    margin: 0 auto;
+}
+
+.footer_img{
+    width: 250px;
+    align-items: center;
+}
+
+.footer_hea{
+    width: 800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    float: right;
+    margin-top: 30px;
+}
+
+.footer_hea a{
+width: 500px;
+margin-left: 20px;
+font-size: 26px;
+color: gray;
+font-weight: 900;
+}
+
+.footer_hea a:hover{
+    color: #000;
+}
+
+.footer_text{
+    width: 800px;
+    margin-top: -130px;
+    margin-left: 425px;
+    color: gray;
+    font-weight: 600;
+}
+
+.footer_text p{
+    margin-top: 5px;
+}
+
+.menu_bar > a > h4:hover {
+    color: green;
+}
+
+header {
+    background-color: #f1e3c4;
+}
+
+@media (max-width: 1200px){
+    .font {
+        margin-right: 30px;
+        text-align: center;
+        background-color: #f1e3c4;
+    }
+
+    .ber {
+        float: right;
+
+    }
+
+    .ber a{
+        margin-right: 10px;
+        text-decoration: none;
+        color: #000;
+        font-size: 1.2rem;
+
+    }
+
+    #menu_box{
+        width: 100%;
+        background-color:  #f1e3c4;
+    }
+
+    .menu_bar h4{
+        font-size: 22px;
+    }
+
+    #menu_box{
+        padding-bottom: 20px;
+        margin: 0 auto;
+    }
+
+    .menu_bar{
+        width:600px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+    }

@@ -1,0 +1,38 @@
+main{
+    width: 1300px;
+    height: 255px;
+    margin: 0 auto;
+    margin-bottom: 100px;
+}
+
+.main_text > p {
+    width: 300px;
+    margin: 0 auto;
+    font-size: 22px;
+    height: 30px;
+    margin-top: 20px;
+}
+
+.main_text{
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 180px;
+    background-color: #f2e6cd98;
+    padding: 40px;
+    border-radius: 30px;
+    border: 5px double #f1e3c4;
+}
+
+/*수정*/
+.btn{
+    cursor: pointer;
+    width: 250px;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: antiquewhite;
+    border: 1px solid #000;
+    border-radius: 100px;
+    font-size: 24px;
+    margin-top: 50px;
+    margin-left: 120px;
+}

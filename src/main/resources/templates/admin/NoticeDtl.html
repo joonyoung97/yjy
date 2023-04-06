@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{body}">
+
+
+<!-- 사용자 스크립트 추가 -->
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+            $(document).ready(function(){
+                var msg = [[${errorMessage}]];
+                if(msg != null){
+                    alert(msg);
+                }
+            });
+    </script>
+</th:block>
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+    <link th:href="@{/css/NoticeDtl.css}" rel="stylesheet"/>
+    <style>
+
+    </style>
+</th:block>
+
+<div class="main" layout:fragment="content" style="margin-left:25%;margin-right:25%">
+
+    <div>
+        <h1 class="h1_text">|공지사항|</h1>
+    </div>
+    <input type="hidden" id="noticeId" th:value="${noticeFormDto.id}">
+
+    <div th:if="${not #strings.isEmpty(noticeFormDto.bcImgUrl)}" class="notice_img">
+        <div class="repImgDiv">
+            <img th:src="${noticeFormDto.bcImgUrl}" class = "rounded repImg" th:alt="${noticeFormDto.title}">
+        </div>
+    </div>
+    <div th:if="${#strings.isEmpty(noticeFormDto.bcImgUrl)}" class="notice_img">
+        <div class="repImgDiv">
+            <span class="noImgtext">등록된 이미지 없음</span>
+        </div>
+    </div>
+
+    <div class="notice_text">
+        <div>
+            <div class="h4" th:text="${noticeFormDto.title}"></div>
+        </div>
+        <hr class="my-4">
+        <div style="margin-top:50px;">
+            <p class="lead" th:text="${noticeFormDto.bcText}"></p>
+        </div>
+    </div>
+
+</div>
+
+</html>

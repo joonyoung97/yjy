@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{body}">
+
+<th:block layout:fragment="css">
+  <link th:href="@{/css/WordCup.css}" rel="stylesheet">
+
+</th:block>
+
+<th:block layout:fragment="script">
+  <script th:src="@{/js/WordCup.js}"></script>
+  <script th:inline="javascript">
+
+      function start() {
+         lezhin.start();
+      }
+  </script>
+</th:block>
+
+  <div layout:fragment="content">
+      <main>
+        <h1 id="roundTitle">반려동물 월드컵</h1>
+        <div class="content default" id="content">
+          <button id="btnGameStart" onclick="start()">게임 참여</button>
+        </div>
+    </main>
+  </div>
+</html>

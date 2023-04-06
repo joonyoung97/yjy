@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{body}">
+
+
+
+<th:block layout:fragment="script">
+  <script th:src="@{/js/bcList.js}"></script>
+  <script th:inline="javascript">
+
+        function page(page){
+            var searchQuery = $("#searchQuery").val();
+
+            location.href="/bcList/show/" + page + "?searchQuery=" + searchQuery;
+        }
+
+
+        function del(bcListId){
+            const result = confirm('문의사항을 삭제 하시겠습니까?');
+
+            if(result){
+                location.href="/bcList/show/delete/"+bcListId;
+            }
+        }
+    </script>
+</th:block>
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+  <link th:href="@{/css/bcList.css}" rel="stylesheet">
+  <style>
+        select{
+            margin-right:10px;
+        }
+    </style>
+</th:block>
+
+
+<div layout:fragment="content">
+  <form th:action="@{'/bcList/show/'}" role="form" method="get" th:object="${bcLists}">
+
+    <main class="main">
+      <div class="pu">
+        <h1 class="h1_font">문의 내역 리스트</h1>
+        <a class="wbtn" onclick="location.href='/bcList/new'"><input type="button" value="글쓰기"></a>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+      </div>
+
+      <table border="1" class="table">
+        <tr class="tr">
+          <th class="no">No.</th>
+          <th class="email">작성자(이메일)</th>
+          <th class="title">제목</th>
+          <th><i class="bi bi-unlock"></i>/<i class="bi bi-lock-fill"></i>공개여부</th>
+          <th class="nat">작성일자</th>
+          <th sec:authorize="hasAnyAuthority('ROLE_ADMIN')">답변</th>
+          <th sec:authorize="hasAnyAuthority('ROLE_ADMIN')">수정</th>
+          <th sec:authorize="hasAnyAuthority('ROLE_ADMIN')">삭제</th>
+        </tr>
+
+        <tr th:each="bcList, status: ${bcLists.getContent()}">
+          <td class="center" th:text="${(bcListTotalCount - status.index) - (bcLists.number * 5)}"></td>
+          <td class="center" th:text="${bcList.email}"></td>
+          <td class="center" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+            <a th:href="'/bcList/show/dtl/'+${bcList.id}" th:text="${bcList.bcTitle}"></a>
+          </td>
+          <td class="center" sec:authorize="hasAnyAuthority('ROLE_USER')">
+            <div th:unless="${mybcList == 'true'}">
+              <span th:if="${#bools.isTrue(bcList.bcSecretText)}">비밀글입니다.</span>
+              <a th:unless="${#bools.isTrue(bcList.bcSecretText)}" th:href="'/bcList/show/dtl/'+${bcList.id}" th:text="${bcList.bcTitle}"></a>
+            </div>
+            <div th:if="${mybcList == 'true'}">
+              <a th:href="'/bcList/show/dtl/'+${bcList.id}" th:text="${bcList.bcTitle}"></a>
+            </div>
+          </td>
+
+          <!--   비밀글 설정     -->
+          <td class="center">
+            <div th:if="${#bools.isTrue(bcList.bcSecretText)}">
+             <i class="bi bi-lock-fill"></i>
+            </div>
+          </td>
+
+          <td class="center" th:text="${#temporals.format(bcList.regDate, 'yyyy-MM-dd HH:mm')}"></td>
+
+          <td class="center" th:if="${#bools.isTrue(bcList.bcAnswerCk)}">
+            <span>답변완료</span>
+          </td>
+          <td class="center" th:unless="${#bools.isTrue(bcList.bcAnswerCk)}">
+            <a sec:authorize="hasAnyAuthority('ROLE_ADMIN')" th:href="'/bcList/list/'+${bcList.id}">답변</a>
+            <span sec:authorize="hasAnyAuthority('ROLE_USER')">미답변</span>
+          </td>
+          <td class="center" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+            <a th:href="'/bcList/show/update/'+${bcList.id}" >수정</a>
+          </td>
+          <td class="center" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+            <a th:onclick="'javascript:del(' + ${bcList.id} + ')'" style="cursor:pointer;">삭제</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <div th:with="start=${(bcLists.number/maxPage)*maxPage + 1}, end=(${(bcLists.totalPages == 0) ? 1 : (start + (maxPage - 1) < bcLists.totalPages ? start + (maxPage - 1) :bcLists.totalPages)})" >
+        <ul class="pagination">
+
+          <li class="pageprevious" th:classappend="${bcLists.first}?'disabled'">
+            <a th:onclick="'javascript:page(' + ${bcLists.number - 1} + ')'">
+              <span aria-hidden='true'>&laquo;</span>
+            </a>
+          </li>
+
+          <li class="pagenum" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${bcLists.number eq page-1}?'active':''">
+            <a th:onclick="'javascript:page(' + ${page - 1} + ')'" th:inline="text">[[${page}]]</a>
+          </li>
+
+          <li class="pagenext" th:classappend="${bcLists.last}?'disabled'">
+            <a th:onclick="'javascript:page(' + ${bcLists.number + 1} + ')'">
+              <span aria-hidden='true'>&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </main>
+  </form>
+</div>
+</html>

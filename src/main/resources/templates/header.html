@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf/org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:fragment="header">
+    <header>
+        <nav>
+            <div class="font">
+                <h1><a th:href="@{/}"><img class="logo_img" th:src="@{/image/logo_img.png}"></a></h1>
+            </div>
+
+            <div class="ber">
+                <li sec:authorize="isAnonymous()">
+                    <a th:href="@{/members/login}">로그인</a>
+                </li>
+                <li sec:authorize="isAnonymous()">
+                    <a th:href="@{/members/new}">회원가입</a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <a th:href="@{/members/logout}">로그아웃</a>
+                </li>
+                <li><a th:href="@{/Search.html}"><i class="bi bi-search"></i></a></li>
+                <li><a th:href="News.html"><i class="bi bi-bell-fill"></i></a></li>
+            </div>
+
+            <div id="menu_box">
+                <div class="menu_bar">
+
+                    <!-- 관리자 페이지 -->
+                    <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                        <a th:href="@{/management}"><h4>회원관리</h4></a>
+                    </li>
+                    <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                        <a th:href="@{/admin/notice}"><h4>공지사항</h4></a>
+                    </li>
+                    <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                        <a th:href="@{/bcList/show}"><h4>문의사항</h4></a>
+                    </li>
+                    <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                        <a th:href="@{/admin/adac}"><h4>반려동물관리대장</h4></a>
+                    </li>
+                    <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                        <a th:href="@{/adacpage/show}"><h4>유기동물센터관리대장</h4></a>
+                    </li>
+
+                    <!-- 회원 페이지 -->
+                    <li sec:authorize="hasAnyAuthority('ROLE_USER')">
+                        <a th:href="@{/bestchoice}"><h4>추천</h4></a>
+                    </li>
+                    <li sec:authorize="hasAnyAuthority('ROLE_USER')">
+                        <a th:href="@{/wordCup}"><h4>월드컵</h4></a>
+                    </li>
+                    <li sec:authorize="hasAnyAuthority('ROLE_USER')">
+                        <a th:href="@{/SUB_Service}"><h4>후원</h4></a>
+                    </li>
+                    <li sec:authorize="hasAnyAuthority('ROLE_USER')">
+                        <a th:href="@{/user/notice}"><h4>공지사항</h4></a>
+                    </li>
+                    <li sec:authorize="hasAnyAuthority('ROLE_USER')">
+                        <a th:href="@{/bcList/show}"><h4>문의사항</h4></a>
+                    </li>
+                    <li sec:authorize="hasAnyAuthority('ROLE_USER')">
+                        <a th:href="@{/members/Mypage}"><h4>마이페이지</h4></a>
+                    </li>
+                    <li sec:authorize="hasAnyAuthority('ROLE_USER')">
+                        <a th:href="@{/}"><h4>리뷰/후기</h4></a>
+                    </li>
+
+                    <!-- 비회원 페이지 -->
+                    <li sec:authorize="isAnonymous()">
+                        <a th:href="@{/wordCup}"><h4>월드컵</h4></a>
+                    </li>
+                    <li sec:authorize="isAnonymous()">
+                        <a th:href="@{/user/notice}"><h4>공지사항</h4></a>
+                    </li>
+                    <li sec:authorize="isAnonymous()">
+                        <a th:href="@{/}"><h4>리뷰/후기</h4></a>
+                    </li>
+                </div>
+            </div>
+        </nav>
+    </header>
+</div>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{body}">
+
+<th:block layout:fragment="css">
+    <link th:href="@{/css/BestChoice.css}" rel="stylesheet" />
+</th:block>
+
+<head>
+    <!-- 사용자 스크립트 추가 -->
+    <script th:inline="javascript">
+        $(document).ready(function(){
+            var msg = [[${errorMessage}]];
+            if(msg != null){
+                alert(msg);
+            }
+
+        });
+    </script>
+
+    <style>
+
+    </style>
+</head>
+
+<div layout:fragment="content">
+    <main>
+        <div class="Best_box">
+            <h1 class="h1_font">추천목록</h1>
+            <div class="box" th:each="section, status: ${#numbers.sequence(1, 6)}">
+                <div th:if="${status.index < #lists.size(bestChoiceList)}">
+                    <a th:href="'/bestchoice/bcdetail/'+${bestChoiceList[status.index].id}">
+                        <div class="repImgDiv">
+                            <img th:src="${bestChoiceList[status.index].adacImgDtoList[0].imgUrl}" class = "rounded repImg" th:alt="${bestChoiceList[status.index].cultivar}">
+                        </div>
+                        <span th:text="${bestChoiceList[status.index].cultivar}"></span>
+                        <span th:text="${bestChoiceList[status.index].age}"></span>
+                    </a>
+                </div>
+
+                <div th:unless="${status.index < #lists.size(bestChoiceList)}">
+                    <span>매칭된 결과가 없습니다.</span>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</html>

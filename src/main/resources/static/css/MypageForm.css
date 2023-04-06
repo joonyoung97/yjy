@@ -1,0 +1,141 @@
+.warpper{
+    width: 100%;
+
+}
+
+h1{
+    width: 950px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.warpper > h1 {
+    margin-top: 30px;
+}
+
+.hea{
+    width: 830px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    border-bottom: 2px solid grey;
+    margin-top: 40px;
+}
+
+h6{
+    font-size: 18px;
+    margin-right: 20px;
+}
+
+.hea > h4 {
+    margin-left: 20px;
+    font-size: 27px;
+}
+
+.table{
+    width: 650px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+/*기본정보*/
+.tr > td{
+    width: 160px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.tr{
+    margin-top: 15px;
+}
+
+.tr > td > input {
+    width: 400px;
+    height: 30px;
+    margin: 0 auto;
+    margin-bottom: 12px;
+    margin-top: 12px;
+}
+
+.tr > td:first-child{
+    background-color: rgba(128, 128, 128, 0.144);
+    border: 2px solid rgba(128, 128, 128, 0.144);
+}
+
+#parentingExperience{
+    width: 500px;
+    padding: 12px;
+}
+
+
+#time {
+    width: 170px;
+    margin-bottom: 12px;
+    margin-top: 12px;
+}
+
+#Inmate {
+    width: 400px;
+}
+
+#Inmate input{
+    margin-right: 8px;
+    width: 18px;
+    height: 18px;
+    margin-left: 25px;
+    margin-bottom: 18px;
+    margin-top: 18px;
+}
+
+footer{
+    margin-top: 50px;
+}
+
+button {
+    cursor: pointer;
+    width: 150px;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    border: 1px solid #000;
+    background-color: antiquewhite;
+}
+
+.btn{
+    cursor: pointer;
+    width: 950px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+/*추가*/
+.btn > button:first-child {
+    margin-right: 30px;
+}
+
+#mbti{
+    width: 300px;
+    height: 35px;
+    margin: 10px;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    font-size: 18px;
+}
+
+.tr > .radio {
+    display: inline-block;
+    width: 50%;
+    font-size: 18px;
+}
+
+#workTime {
+    width: 300px;
+    margin: 0 15px;
+    font-size: 15px;
+    font-weight: 600;
+}
+

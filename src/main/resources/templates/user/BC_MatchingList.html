@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{body}">
+
+<head>
+    <!-- 사용자 스크립트 추가 -->
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        $(document).ready(function(){
+            $("#searchBtn").on("click",function(e) {
+                e.preventDefault();
+                page(0);
+            });
+
+            var msg = [[${errorMessage}]];
+            if(msg != null){
+                alert(msg);
+            }
+
+            if([[${#lists.isEmpty(bCmatchings.getContent())}]]){
+                alert("매칭된 내역이 없습니다.");
+                location.href = "/members/Mypage";
+            }
+
+        });
+
+        function page(page){
+            location.href="/bestchoice/list/" + page;
+        }
+        /*]]>*/
+    </script>
+
+    <link th:href="@{/css/BC_MatchingList.css}" rel="stylesheet"/>
+    <!-- 사용자 CSS 추가 -->
+    <style>
+        select{
+            margin-right:10px;
+        }
+    </style>
+</head>
+
+<div layout:fragment="content" class="main">
+    <div th:if="${#lists.isEmpty(bCmatchings.getContent())}">
+
+    </div>
+    <div th:unless="${#lists.isEmpty(bCmatchings.getContent())}">
+        <div class="pu">
+            <h1 class="h1_font">매칭결과</h1>
+        </div>
+
+        <form th:action="@{'/bestchoice/list/' + ${bCmatchings.number}}" role="form" method="get" th:object="${bCmatchings}">
+            <table class="table">
+                <tr class="tr">
+                    <th class="no">No.</th>
+                    <th>강아지/고양이</th>
+                    <th>품종</th>
+                    <th>나이</th>
+                    <th>유기센터명</th>
+                    <th class="natDate">전화번호</th>
+                    <th class="natDate">매칭일</th>
+                    <th class="nat">바로가기</th>
+                </tr>
+
+                <tr class="td" th:each="bCmatching, status: ${bCmatchings.getContent()}">
+                    <!--                    데이터베이스에 저장된 id를 사용하면 삭제 했을 시 순서대로 나오지 않기 때문에 Page객체에 담겨진 데이터 갯수로 계산해서 사용-->
+                    <td class="notd" th:text="${(bCmatchingTotalCount - status.index) - (bCmatchings.number * 10)}"></td>
+                    <!--                    <td th:text="${notice.id}"></td>-->
+                    <td class="titletd" th:text="${bestChoiceDtoList[status.index].animal}"></td>
+                    <td class="titletd" th:text="${bestChoiceDtoList[status.index].cultivar}"></td>
+                    <td class="titletd" th:text="${bestChoiceDtoList[status.index].age}"></td>
+                    <td class="titletd" th:text="${adAcPageDtoList[status.index].name}"></td>
+                    <td class="titletd" th:text="${adAcPageDtoList[status.index].tel}"></td>
+                    <td class="datetd" th:text="${#temporals.format(bCmatching.regDate, 'yyyy-MM-dd HH:mm')}"></td>
+                    <td>
+                        <a target="_blank" th:href="${adAcPageDtoList[status.index].homepage}"><button type="button">홈페이지</button></a>
+                    </td>
+                </tr>
+            </table>
+
+            <div th:with="start=${(bCmatchings.number/maxPage)*maxPage + 1}, end=(${(bCmatchings.totalPages == 0) ? 1 : (start + (maxPage - 1) < bCmatchings.totalPages ? start + (maxPage - 1) : bCmatchings.totalPages)})" >
+                <ul class="pagination">
+
+                    <li class="pageprevious" th:classappend="${bCmatchings.first}?'disabled'">
+                        <a th:onclick="'javascript:page(' + ${bCmatchings.number - 1} + ')'">
+                            <span aria-hidden='true'>&laquo;</span>
+                        </a>
+                    </li>
+
+                    <li class="pagenum" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${bCmatchings.number eq page-1}?'active':''">
+                        <a th:onclick="'javascript:page(' + ${page - 1} + ')'" th:inline="text" >[[${page}]]</a>
+                    </li>
+
+                    <li class="pagenext" th:classappend="${bCmatchings.last}?'disabled'">
+                        <a th:onclick="'javascript:page(' + ${bCmatchings.number + 1} + ')'">
+                            <span aria-hidden='true'>&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        </form>
+    </div>
+</div>
+</html>

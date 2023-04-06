@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{body}">
+
+<head>
+  <!-- 사용자 스크립트 추가 -->
+  <script th:inline="javascript">
+        $(document).ready(function(){
+            $("#searchBtn").on("click",function(e) {
+                e.preventDefault();
+                page(0);
+            });
+
+            var msg = [[${errorMessage}]];
+            if(msg != null){
+                alert(msg);
+            }
+
+        });
+
+        function page(page){
+            var searchQuery = $("#searchQuery").val();
+
+            location.href="/user/notice/" + page + "?searchQuery=" + searchQuery;
+        }
+    </script>
+
+  <link th:href="@{/css/UserNotice.css}" rel="stylesheet"/>
+  <!-- 사용자 CSS 추가 -->
+  <style>
+        select{
+            margin-right:10px;
+        }
+    </style>
+</head>
+
+<div layout:fragment="content" class="main">
+  <div class="pu">
+    <h1 class="h1_font">공지사항</h1>
+  </div>
+
+  <form th:action="@{'/user/notice/' + ${notices.number}}" role="form" method="get" th:object="${notices}">
+    <table class="table">
+      <tr class="tr">
+        <th class="no">No.</th>
+        <th>제목</th>
+        <th class="natDate">작성일자</th>
+      </tr>
+
+      <tr class="td" th:each="notice, status: ${notices.getContent()}">
+        <!--                    데이터베이스에 저장된 id를 사용하면 삭제 했을 시 순서대로 나오지 않기 때문에 Page객체에 담겨진 데이터 갯수로 계산해서 사용-->
+        <td class="notd" th:text="${(noticeTotalCount - status.index) - (notices.number * 5)}"></td>
+        <!--                    <td th:text="${notice.id}"></td>-->
+        <td class="titletd">
+          <a th:href="'/user/notice/detail/' +${notice.id}" th:text="${notice.title}"></a>
+        </td>
+        <td class="datetd" th:text="${#temporals.format(notice.regDate, 'yyyy-MM-dd HH:mm')}"></td>
+      </tr>
+    </table>
+
+    <div th:with="start=${(notices.number/maxPage)*maxPage + 1}, end=(${(notices.totalPages == 0) ? 1 : (start + (maxPage - 1) < notices.totalPages ? start + (maxPage - 1) : notices.totalPages)})" >
+      <ul class="pagination">
+
+        <li class="pageprevious" th:classappend="${notices.first}?'disabled'">
+          <a th:onclick="'javascript:page(' + ${notices.number - 1} + ')'">
+            <span aria-hidden='true'>&laquo;</span>
+          </a>
+        </li>
+
+        <li class="pagenum" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${notices.number eq page-1}?'active':''">
+          <a th:onclick="'javascript:page(' + ${page - 1} + ')'" th:inline="text" >[[${page}]]</a>
+        </li>
+
+        <li class="pagenext" th:classappend="${notices.last}?'disabled'">
+          <a th:onclick="'javascript:page(' + ${notices.number + 1} + ')'">
+            <span aria-hidden='true'>&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+    <!--검색창-->
+    <div class="searchwrap" th:object="${noticeSearchDto}">
+      <input th:field="*{searchQuery}" type="text" class="form-control" placeholder="검색할 제목을 입력해주세요.">
+      <button id="searchBtn" type="submit" class="btn btn-primary">검색</button>
+    </div>
+  </form>
+</div>
+</html>

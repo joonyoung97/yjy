@@ -1,0 +1,267 @@
+.hea{
+    width: 800px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    border-bottom: 2px solid grey;
+    margin-top: 40px;
+}
+
+.hea h4{
+    margin-bottom: 10px;
+}
+
+h4{
+    margin-left: 20px;
+    font-size: 22px;
+}
+
+h6{
+    font-size: 18px;
+    margin-right: 20px;
+}
+
+.fieldError {
+    display: flex;
+    justify-content: center;
+}
+
+.box{
+    margin: 0 auto;
+    width: 900px;
+    display: flex;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+
+.box label{
+    font-size: 18px;
+    font-weight: 700;
+    width: 150px;
+    text-align: center;
+}
+
+.box input{
+    width: 400px;
+    height: 30px;
+    margin-left: 50px;
+    font-size: 16px;
+}
+
+option{
+    text-align: center;
+}
+
+.info_box{
+    width: 800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.info_box label{
+    font-size: 18px;
+    font-weight: 700;
+    width: 150px;
+    text-align: center;
+    /* margin-right: 30px; */
+}
+
+.info_box select{
+    width: 400px;
+    font-size: 12px;
+    margin-left: 50px;
+    height: 30px;
+}
+
+.time {
+    display: flex;
+    width: 400px;
+    margin-left: 50px;
+}
+
+.time input{
+    width: 200px;
+    text-align: center;
+    height: 30px;
+}
+
+.MBTI_font{
+    color: red;
+    font-weight: 900;
+}
+
+.rear{
+    display: flex;
+    width: 400px;
+    justify-content: space-around;
+    margin-left: 50px;
+}
+
+.mbti_text{
+    width: 630px;
+    margin: 0 auto;
+    text-align: end;
+    align-items: center;
+    margin-top: -25px;
+    margin-bottom: 30px;
+}
+
+.animal{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+}
+
+.animal input {
+    margin-right: 8px;
+}
+
+.you {
+    margin-left: 50px;
+    display: flex;
+    justify-content: space-around ;
+}
+
+.you > input{
+    margin-right: 8px;
+}
+
+#addr{
+    margin-bottom: 30px;
+}
+
+.rear{
+    display:flex;
+    width:400px;
+    text-align: center;
+}
+
+.rear label{
+    margin-right: 5px;
+}
+
+.rear > input{
+    margin-right: 8px;
+}
+
+h6{
+    font-size: 12px;
+    align-items: center;
+}
+
+.scroll{
+    width: 700px;
+    margin: 0 auto;
+    height: 150PX;
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid #000;
+    margin-bottom: 20px;
+}
+
+.agr_for{
+   width: 750px;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.agr_for input{
+    width: 50px;
+}
+
+.join_but{
+    width: 450px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.join_but button{
+    width:  450px;
+    height: 70px;
+    border-radius: 20px;
+    border: none;
+    background-color: #ffd79b;
+    font-size: 22px;
+    font-weight: 900;
+    padding: 10px;
+    align-items: center;
+    text-align: center;
+    box-shadow: 5px 10px 5px lightgray;
+}
+
+label {
+    display: block;
+}
+
+.agree{
+    width: 750px;
+    margin: 0 auto;
+}
+
+span{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.agree input{
+    margin-bottom: 20px;
+}
+
+.one{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.info_rear {
+    width: 500px;
+    margin: 0 auto;
+    font-weight: 700;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+
+.info_rear label{
+    font-size: 18px;
+    font-weight: 700;
+    width: 100px;
+
+}
+
+.info_rear input {
+    width: 15px;
+    height: 15px;
+}
+
+/*주소*/
+.addr{
+    width: 460px;
+}
+
+#sample6_postcode{
+    width: 100px;
+}
+
+#zip_code_btn{
+    width: 150px;
+    height: 35px;
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+.addr > input {
+    margin-bottom: 30px;
+}
+
+
+.addr_label{
+    margin-left: 150px;
+}
+
+.animal  > input {
+    margin-right: 8px;
+}

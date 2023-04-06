@@ -1,0 +1,133 @@
+.table{
+    margin-top: 15px;
+    width: 1400px;
+    margin: 0 auto;
+    border: 1px solid #000;
+    border-collapse : collapse;
+}
+
+.tr{
+    border: 1px solid black;
+    border-bottom: 3px double #000;
+}
+
+td{
+    border: 1px solid #000;
+}
+
+th{
+    border: 1px solid #000;
+}
+
+.main{
+    width: 1400px;
+    margin: 0 auto;
+    height: 540px;
+    align-items: center;
+}
+
+.td{
+    height: 30px;
+}
+
+.h1_font{
+    width: 1300px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 180px;
+    margin-bottom: 30px;
+}
+
+.pagination{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 30PX;
+}
+
+.pagination > li {
+    width: 50px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.pagination > li > a:hover{
+    color: gray;
+}
+
+button{
+    width: 40px;
+    display: block;
+    margin: 0 auto;
+}
+
+
+/*조금씩 수정됨*/
+.num{
+    width: 40px;
+}
+
+.user{
+    width: 70px;
+}
+
+.email{
+    width: 180px;
+}
+
+.addr{
+    width: 260px;
+}
+
+.tel{
+    width: 130px;
+}
+
+/*추가*/
+.pagination {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.pagination > li {
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+}
+
+.pagination > li > a {
+    display: inline-block;
+    width: 100%;
+}
+
+.pagination > li > a:hover {
+    color:gray;
+}
+
+.pageprevious, pagenext {
+    width: 40px;
+    margin: 0 10px;
+}
+
+.pagenum {
+    width: 30px;
+}
+
+.disabled {
+    pointer-events: none;
+}
+
+.fam{
+    width: 100px;
+}
+
+.ani{
+    width: 80px;
+}
+
+.td > td{
+    text-align: center;
+}

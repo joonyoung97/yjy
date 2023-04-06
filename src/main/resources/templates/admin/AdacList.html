@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{body}">
+
+<head>
+    <!-- 사용자 스크립트 추가 -->
+    <script th:inline="javascript">
+
+            $(document).ready(function(){
+                $("#searchBtn").on("click",function(e) {
+                    e.preventDefault();
+                    page(0);
+                });
+
+
+            });
+
+            function page(page){
+                var searchAdacPage = $("#searchAdacPage").val();
+                var searchAnimal = $("#searchAnimal").val();
+                var searchCultivar = $("#searchCultivar").val();
+
+                location.href="/admin/adac/" + page;
+            }
+
+            function del(noticeId){
+                if(confirm("등록된 반려동물을 삭제 하시겠습니까?")){
+                    location.href="/admin/adac/delete/" + noticeId;
+                }
+            }
+
+        </script>
+
+    <link th:href="@{/css/AdacList.css}" rel="stylesheet"/>
+    <!-- 사용자 CSS 추가 -->
+    <style>
+
+    </style>
+</head>
+
+<div layout:fragment="content" class="main">
+    <h1 class="h1_font">반려동물 관리</h1>
+    <a href="/admin/adac/new"><button type="button" class="btn_1">등록하기</button></a>
+
+    <form th:action="@{'/admin/adac/' + ${bestChoices.number}}" role="form" method="get" th:object="${bestChoices}">
+        <table class="table">
+            <tr class="tr">
+                <th>No.</th>
+                <th>센터</th>
+                <th class="ani">강아지/고양이</th>
+                <th>품종</th>
+                <th>성격</th>
+                <th>크기</th>
+                <th>예방접종</th>
+                <th class="age">나이</th>
+                <th class="nature">성격유형</th>
+                <th>수정</th>
+                <th>삭제</th>
+            </tr>
+            <tr class="tr" th:each="bestChoice, status: ${bestChoices.getContent()}">
+                <!--                    데이터베이스에 저장된 id를 사용하면 삭제 했을 시 순서대로 나오지 않기 때문에 Page객체에 담겨진 데이터 갯수로 계산해서 사용-->
+                <td th:text="${(bestChoiceTotalCount - status.index) - (bestChoices.number * 10)}"></td>
+                <td th:text="${adAcPageList[status.index].name}"></td>
+                <td th:text="${bestChoice.animal}"></td>
+                <td>
+                    <a th:href="'/admin/adac/detail/' +${bestChoice.id}" th:text="${bestChoice.cultivar}"></a>
+                </td>
+                <td th:text="${bestChoice.nature}"></td>
+                <td th:text="${bestChoice.size}"></td>
+                <td th:text="${bestChoice.vaccination}"></td>
+                <td th:text="${bestChoice.age}"></td>
+                <td th:text="${bestChoice.mbti}"></td>
+                <td>
+                    <a th:href="'/admin/adac/update/'+${bestChoice.id}"><button type="button">수정</button></a>
+                </td>
+                <td>
+                    <a th:onclick="'javascript:del(' +${bestChoice.id}+ ')'" style="cursor:pointer;"><button type="button">삭제</button></a>
+                    <!--                        <a th:href="'/admin/posting/notice/delete/'+${notice.id}">삭제</a>-->
+                </td>
+            </tr>
+        </table>
+
+        <div th:with="start=${(bestChoices.number/maxPage)*maxPage + 1}, end=(${(bestChoices.totalPages == 0) ? 1 : (start + (maxPage - 1) < bestChoices.totalPages ? start + (maxPage - 1) : bestChoices.totalPages)})" >
+            <ul class="pagination">
+
+                <li class="pageprevious" th:classappend="${bestChoices.first}?'disabled'">
+                    <a th:onclick="'javascript:page(' + ${bestChoices.number - 1} + ')'">
+                        <span aria-hidden='true'>&laquo;</span>
+                    </a>
+                </li>
+
+                <li class="pagenum" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${bestChoices.number eq page-1}?'active':''">
+                    <a th:onclick="'javascript:page(' + ${page - 1} + ')'" th:inline="text">[[${page}]]</a>
+                </li>
+
+                <li class="pagenext" th:classappend="${bestChoices.last}?'disabled'">
+                    <a th:onclick="'javascript:page(' + ${bestChoices.number + 1} + ')'">
+                        <span aria-hidden='true'>&raquo;</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+    </form>
+</div>
+</html>
